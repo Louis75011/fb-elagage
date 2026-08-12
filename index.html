@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
   <meta name="robots" content="noindex, nofollow">
   <title>F Bouchard Elagage — Arboriste Élagueur Grimpeur (Yvelines)</title>
 
@@ -62,12 +63,15 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 105px;
       font-size: 16px;
       background-color: var(--color-bg-main);
       color: var(--color-text-main);
       font-family: var(--font-stack);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     body {
@@ -76,6 +80,7 @@
       flex-direction: column;
       position: relative;
       overflow-x: hidden;
+      width: 100%;
       padding-top: 36px;
     }
 
@@ -109,14 +114,23 @@
       line-height: 1.2;
       font-weight: 700;
       letter-spacing: -0.01em;
+      overflow-wrap: break-word;
     }
 
     p {
       margin-bottom: 1rem;
+      overflow-wrap: break-word;
     }
 
     p:last-child {
       margin-bottom: 0;
+    }
+
+    /* Neutralisation des liens automatiques de telephone */
+    a[href^="tel"], a[href^="tel"]:hover, a[href^="tel"]:focus {
+      color: inherit !important;
+      text-decoration: none !important;
+      cursor: default;
     }
 
     /* Classe utilitaire Serif */
@@ -140,12 +154,21 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0 1rem;
+      padding: 0 0.75rem;
       z-index: 9999;
       border-bottom: 2px solid var(--color-accent);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-family: var(--font-sans);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .demo-banner-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .demo-banner-tag {
@@ -156,6 +179,7 @@
       font-weight: 800;
       border-radius: 2px;
       margin-right: 10px;
+      flex-shrink: 0;
     }
 
     /* ==========================================================================
@@ -179,6 +203,7 @@
       line-height: 1.2;
       text-align: center;
       white-space: nowrap;
+      max-width: 100%;
     }
 
     .btn-primary {
@@ -234,6 +259,7 @@
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 0 1.5rem 0 3.5rem;
+      width: 100%;
     }
 
     /* Le fil vertical de rappel style Editorial dashed */
@@ -270,16 +296,17 @@
     }
 
     /* ==========================================================================
-       EN-TÊTE / HEADER NAVIGATION DE PAGE
+       EN-TÊTE / HEADER NAVIGATION DE PAGE COMPACTE & RESPONSIVE
        ========================================================================== */
     .site-header {
       background-color: var(--color-green-dark);
       color: #fcfbf7;
-      padding: 1.15rem 0;
+      padding: 0.75rem 0;
       border-bottom: 2px solid var(--color-bark-dark);
       position: sticky;
       top: 36px;
-      z-index: 100;
+      z-index: 1000;
+      width: 100%;
     }
 
     .header-inner {
@@ -289,19 +316,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 1rem;
+      position: relative;
     }
 
     .brand-block {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .brand-symbol {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       background-color: var(--color-accent);
       color: #ffffff;
       display: flex;
@@ -309,32 +336,33 @@
       justify-content: center;
       font-family: var(--font-serif);
       font-weight: 900;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       border-radius: 2px;
       flex-shrink: 0;
     }
 
     .brand-titles h1 {
       color: #fcfbf7;
-      font-size: 1.35rem;
+      font-size: 1.2rem;
       font-family: var(--font-serif);
       letter-spacing: -0.01em;
       margin: 0;
+      line-height: 1.1;
     }
 
     .brand-titles .sub {
       color: #b8c7bc;
-      font-size: 0.825rem;
+      font-size: 0.8rem;
       font-family: var(--font-sans);
       font-weight: 500;
       font-style: italic;
+      margin-top: 2px;
     }
 
     .header-nav {
       display: flex;
       gap: 1.25rem;
       align-items: center;
-      flex-wrap: wrap;
     }
 
     .header-nav a {
@@ -350,7 +378,7 @@
       transition: border-color 0.15s ease, color 0.15s ease;
     }
 
-    .header-nav a:hover {
+    .header-nav a:hover, .header-nav a:focus-visible {
       color: #ffffff;
       border-bottom-color: var(--color-accent);
     }
@@ -371,6 +399,106 @@
       border-radius: 2px;
       border: 1px solid rgba(255, 255, 255, 0.18);
       letter-spacing: 0.04em;
+      text-decoration: none !important;
+      cursor: default;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    /* Bouton toggle menu mobile */
+    .menu-toggle {
+      display: none;
+      background-color: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 0.45rem 0.75rem;
+      border-radius: 2px;
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .menu-toggle:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: var(--color-accent);
+    }
+
+    .menu-toggle-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 16px;
+    }
+
+    .menu-toggle-bars span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background-color: #ffffff;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    /* Adaptations Mobile Header (< 900px) */
+    @media (max-width: 899px) {
+      .site-header {
+        padding: 0.6rem 0;
+      }
+
+      .header-inner {
+        padding: 0 1rem;
+      }
+
+      .brand-titles .sub {
+        display: none; /* Masqué sur mobile pour garder une barre compacte */
+      }
+
+      .header-cta {
+        display: none; /* Masqué du bar principal mobile, intégré dans le menu déroulant */
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .header-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--color-green-dark);
+        border-bottom: 3px solid var(--color-accent);
+        flex-direction: column;
+        padding: 1.25rem 1rem;
+        gap: 0.75rem;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        z-index: 1001;
+      }
+
+      .site-header.is-open .header-nav {
+        display: flex;
+      }
+
+      .header-nav a {
+        width: 100%;
+        padding: 0.65rem 0.85rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .mobile-menu-phone {
+        margin-top: 0.5rem;
+        padding-top: 0.75rem;
+        border-top: 1px dashed rgba(255, 255, 255, 0.15);
+        display: flex;
+        justify-content: center;
+      }
     }
 
     /* ==========================================================================
@@ -381,6 +509,7 @@
       background-color: var(--color-surface);
       border-bottom: 1px solid var(--color-border);
       position: relative;
+      scroll-margin-top: 105px;
     }
 
     .hero-grid {
@@ -415,6 +544,7 @@
       padding: 0.3rem 0.75rem;
       border-radius: 2px;
       border: 1px solid #f2d2a4;
+      max-width: 100%;
     }
 
     .pill-reassurance {
@@ -425,15 +555,17 @@
       padding: 0.3rem 0.75rem;
       border-radius: 2px;
       border: 1px solid var(--color-border);
+      max-width: 100%;
     }
 
     .hero-title {
       font-family: var(--font-serif);
-      font-size: 2.35rem;
+      font-size: clamp(1.45rem, 5.5vw, 2.35rem);
       color: var(--color-green-dark);
       margin-bottom: 1.25rem;
-      line-height: 1.15;
+      line-height: 1.18;
       font-weight: 700;
+      overflow-wrap: break-word;
     }
 
     @media (min-width: 768px) {
@@ -502,6 +634,7 @@
       overflow: hidden;
       border: 1px solid var(--color-border);
       box-shadow: 0 4px 12px rgba(27, 48, 34, 0.08);
+      max-width: 100%;
     }
 
     .hero-visual-img {
@@ -536,6 +669,7 @@
     .section-block {
       padding: 4rem 0;
       position: relative;
+      scroll-margin-top: 105px;
     }
 
     .section-block-alt {
@@ -561,9 +695,10 @@
 
     .section-title {
       font-family: var(--font-serif);
-      font-size: 2.1rem;
+      font-size: clamp(1.35rem, 5vw, 2.1rem);
       color: var(--color-green-dark);
       margin-bottom: 0.75rem;
+      overflow-wrap: break-word;
     }
 
     .section-intro {
@@ -760,7 +895,7 @@
       overflow: hidden;
     }
 
-    .gallery-img-container img, .gallery-img-container svg {
+    .gallery-img-container img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -1103,23 +1238,55 @@
       font-size: 0.8125rem;
     }
 
-    /* Adjustments responsiveness mobile */
-    @media (max-width: 767px) {
-      .vertical-container {
-        padding-left: 2.5rem;
-      }
+    /* Ajustements mobile < 640px */
+    @media (max-width: 640px) {
       :root {
         --rope-left-offset: 16px;
       }
+
+      .vertical-container {
+        padding-left: 2.25rem;
+        padding-right: 0.85rem;
+      }
+
       .altitude-badge {
         width: 30px;
         height: 30px;
         font-size: 0.65rem;
         left: calc(var(--rope-left-offset) - 14px);
       }
-      .phone-display {
-        font-size: 0.95rem;
-        padding: 0.35rem 0.6rem;
+
+      .hero-section {
+        padding: 2.5rem 0 2rem 0;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .section-block {
+        padding: 2.5rem 0;
+      }
+
+      .reviews-header-block {
+        padding: 1.25rem 1rem;
+      }
+
+      .contact-wrapper {
+        padding: 2rem 1.25rem;
+      }
+
+      .contact-info-block {
+        padding: 1.25rem 1rem;
+      }
+
+      .zone-container {
+        padding: 1.5rem 1rem;
       }
     }
   </style>
@@ -1131,11 +1298,11 @@
        ========================================================================== -->
   <aside class="demo-banner" aria-label="Avertissement maquette">
     <span class="demo-banner-tag">Maquette</span>
-    <span>Maquette de travail — Arx Systema — contenus et charte à valider</span>
+    <span class="demo-banner-text">Maquette de travail — Arx Systema — contenus et charte à valider</span>
   </aside>
 
   <!-- ==========================================================================
-       EN-TÊTE DE NAVIGATION PERMANENT
+       EN-TÊTE DE NAVIGATION PERMANENT ET COMPACT SUR MOBILE
        ========================================================================== -->
   <header class="site-header">
     <div class="header-inner">
@@ -1147,13 +1314,27 @@
         </div>
       </div>
 
-      <nav class="header-nav" aria-label="Navigation principale">
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="header-nav" aria-label="Ouvrir le menu de navigation">
+        <span class="menu-toggle-bars" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span>Menu</span>
+      </button>
+
+      <nav class="header-nav" id="header-nav" aria-label="Navigation principale">
         <a href="#prestations">Prestations</a>
         <a href="#assurances">Garanties</a>
         <a href="#galerie">Chantiers</a>
         <a href="#zone">Secteur (78)</a>
         <a href="#avis">Avis (5.0)</a>
         <a href="#contact">Contact</a>
+        <div class="mobile-menu-phone">
+          <div class="phone-display" title="Téléphone non cliquable sur maquette">
+            06 87 22 50 01
+          </div>
+        </div>
       </nav>
 
       <div class="header-cta">
@@ -1277,7 +1458,7 @@
           <div class="service-card-top">
             <span class="service-num">03</span>
           </div>
-          <h3 class="service-title">Abattage complexe</h3>
+          <h3 class="service-title">Abattage technique &amp; délicat</h3>
           <p class="service-desc">
             Abattage direct ou guidé pour les arbres morts, sénescents, dangereux ou menaçant de s'effondrer. Maîtrise des angles de chute et des trajectoires.
           </p>
@@ -1293,7 +1474,7 @@
           <div class="service-card-top">
             <span class="service-num">04</span>
           </div>
-          <h3 class="service-title">Haubanage &amp; Sécurisation</h3>
+          <h3 class="service-title">Haubanage de sécurité</h3>
           <p class="service-desc">
             Consolidation et maintien des charpentières ou des axes codominants fragilisés à l'aide de haubans souples ou dynamiques sans blesser le bois.
           </p>
@@ -1309,9 +1490,9 @@
           <div class="service-card-top">
             <span class="service-num">05</span>
           </div>
-          <h3 class="service-title">Broyage &amp; Dessouchage</h3>
+          <h3 class="service-title">Rognage de souche &amp; Broyage</h3>
           <p class="service-desc">
-            Broyage des branches sur place et rognage de souche (dessouchage mécanique). Élimination des racines pour réaménager ou ré-engazonner le terrain.
+            Élimination mécanique des souches sous le niveau du sol pour réengazonner ou replanter. Broyage des branches et évacuation complète des rémanents.
           </p>
           <ul class="service-features">
             <li>Rognage automoteur respectueux des pelouses</li>
@@ -1325,9 +1506,9 @@
           <div class="service-card-top">
             <span class="service-num">06</span>
           </div>
-          <h3 class="service-title">Diagnostic &amp; Chenilles</h3>
+          <h3 class="service-title">Diagnostic &amp; Urgence tempête</h3>
           <p class="service-desc">
-            Évaluation mécanique et sanitaire des arbres (pourritures racinaires, champignons lignivores). Traitement et échenillage contre les chenilles processionnaires.
+            Expertise sanitaire et sécuritaire de vos arbres. Intervention rapide après intempéries pour sécuriser les branches cassées ou suspendues dans le houppier.
           </p>
           <ul class="service-features">
             <li>Diagnostic visuel et pathologique</li>
@@ -1340,119 +1521,95 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 3 : CE QUI RASSURE (ASSURANCES & GARANTIES) - ALTITUDE +10M
+         SECTION 3 : CE QUI RASSURE - ALTITUDE +12M
          ========================================================================== -->
     <section class="section-block" id="assurances">
-      <div class="altitude-badge" title="Garanties & Rétention">+10m</div>
+      <div class="altitude-badge" title="Garanties & Sécurité">+12m</div>
 
       <div class="section-header">
         <span class="section-tag">Engagements &amp; Sécurité</span>
-        <h2 class="section-title">Ce qui vous garantit un chantier sans risque</h2>
+        <h2 class="section-title">Pourquoi confier vos arbres à un professionnel qualifié</h2>
         <p class="section-intro">
-          Monter dans un arbre exige une rigueur absolue. Vous confiez votre propriété à un artisan qualifié, spécifiquement assuré pour l'élagage en hauteur et engagé à laisser les lieux impeccables.
+          L'élagage en hauteur et l'abattage sont des travaux à haut risque. Nous mettons en œuvre des protocoles stricts pour protéger votre propriété, vos proches et vos végétaux.
         </p>
       </div>
 
       <div class="reassurance-grid">
         
-        <div class="reassurance-card">
+        <article class="reassurance-card">
           <div class="reassurance-header">
-            <div class="reassurance-badge-icon">1</div>
+            <div class="reassurance-badge-icon">RC</div>
             <div>
-              <h3 class="reassurance-title">Assurance Spécifique Élagage</h3>
-              <p style="margin:0; font-size: 0.85rem; color: var(--color-text-muted);">Responsabilité Civile &amp; Décennale professionnelle</p>
+              <h3 class="reassurance-title">Assurance Responsabilité Civile Pro</h3>
+              <div style="font-size: 0.85rem; color: var(--color-accent); font-weight: 700;">Couverture travaux en hauteur</div>
             </div>
           </div>
           <div class="reassurance-body">
-            Entreprise expressément assurée pour les travaux d'élagage, d'abattage et de démontage en hauteur. Vos clôtures, toitures, vérandas et aménagements paysagers sont rigoureusement protégés.
-            <div style="margin-top: 0.75rem;">
-              <span class="to-confirm">[À CONFIRMER : N° de police d'assurance et nom de la compagnie]</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="reassurance-card">
-          <div class="reassurance-header">
-            <div class="reassurance-badge-icon">2</div>
-            <div>
-              <h3 class="reassurance-title">Qualification &amp; Diplôme Arboriste</h3>
-              <p style="margin:0; font-size: 0.85rem; color: var(--color-text-muted);">Formation professionnelle grimpeur arboriste</p>
-            </div>
-          </div>
-          <div class="reassurance-body">
-            Félix Bouchard est formé aux techniques de grimpe sur corde, aux règles d'ancrage et de sécurité selon la réglementation des travaux en hauteur.
-            <div style="margin-top: 0.75rem;">
-              <span class="to-confirm">[À CONFIRMER : Intitulé exact du Certificat de Spécialisation]</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="reassurance-card">
-          <div class="reassurance-header">
-            <div class="reassurance-badge-icon">3</div>
-            <div>
-              <h3 class="reassurance-title">Matériel de Grimpe &amp; ÉPI Normés</h3>
-              <p style="margin:0; font-size: 0.85rem; color: var(--color-text-muted);">Contrôle régulier des cordages et baudriers</p>
-            </div>
-          </div>
-          <div class="reassurance-body">
-            Utilisation d'équipements de protection individuelle (ÉPI) certifiés, de cordes de rétention dynamiques et de tronçonneuses révisées.
+            <p>
+              Chaque chantier est couvert par une assurance Responsabilité Civile Professionnelle spécifique aux métiers de l'arboriculture et des travaux en hauteur sur corde.
+            </p>
             <ul class="reassurance-list">
-              <li>Ancrages doubles systématiques pendant la grimpe</li>
-              <li>Poulies de rétention dimensionnées selon le poids des pièces</li>
+              <li>Couverture des dommages matériels et corporels</li>
+              <li>Prise en charge des dégâts potentiels sur toitures, clôtures et réseaux</li>
+              <li>Attestation d'assurance remise sur simple demande avant le début des travaux</li>
             </ul>
+            <div class="to-confirm">[À CONFIRMER : Nom de la compagnie d'assurance &amp; numéro de contrat]</div>
           </div>
-        </div>
+        </article>
 
-        <div class="reassurance-card">
+        <article class="reassurance-card">
           <div class="reassurance-header">
-            <div class="reassurance-badge-icon">4</div>
+            <div class="reassurance-badge-icon">CS</div>
             <div>
-              <h3 class="reassurance-title">Chantier Redescendu Propre</h3>
-              <p style="margin:0; font-size: 0.85rem; color: var(--color-text-muted);">Nettoyage méticuleux après intervention</p>
+              <h3 class="reassurance-title">Qualification Arboriste Élagueur</h3>
+              <div style="font-size: 0.85rem; color: var(--color-accent); font-weight: 700;">Certification de Spécialisation (Taille &amp; Soins des Arbres)</div>
             </div>
           </div>
           <div class="reassurance-body">
-            Aucun débris ni branche laissés à l'abandon. Broyage des rémanents, évacuation des bois ou débitage selon votre souhait pour du bois de chauffage.
+            <p>
+              Rigueur technique et maîtrise des accès sur corde. Formation spécialisée garantissant le respect de la biologie de l'arbre et la sécurité sur le chantier.
+            </p>
             <ul class="reassurance-list">
-              <li>Ratissage des pelouses et des allées</li>
-              <li>Restitution du terrain dans son état d'origine</li>
+              <li>Port obligatoire des Équipements de Protection Individuelle (EPI certifiés)</li>
+              <li>Contrôle quotidien et révision régulière du matériel de grimpe et de rétention</li>
+              <li>Connaissance approfondie de la physiologie et des pathologies arboricoles</li>
             </ul>
+            <div class="to-confirm">[À CONFIRMER : Titre exact du diplôme ou certificat d'élagueur]</div>
           </div>
-        </div>
+        </article>
 
       </div>
     </section>
 
     <!-- ==========================================================================
-         SECTION 4 : GALERIE DE CHANTIERS RÉELS - ALTITUDE +5M
+         SECTION 4 : GALERIE DE CHANTIERS EN IMAGES - ALTITUDE +6M
          ========================================================================== -->
     <section class="section-block section-block-alt" id="galerie">
-      <div class="altitude-badge" title="Photos terrain">+5m</div>
+      <div class="altitude-badge" title="Photos de chantiers">+6m</div>
 
       <div class="section-header">
-        <span class="section-tag">Photos du terrain</span>
-        <h2 class="section-title">Galerie de chantiers en intervention</h2>
+        <span class="section-tag">Exemples d'interventions</span>
+        <h2 class="section-title">Chantiers d'élagage et de démontage en Yvelines</h2>
         <p class="section-intro">
-          Aperçu de nos interventions réelles dans les Yvelines : travail en cime de grand arbre, démontage délicat sur fut et rognage de souche au sol.
+          Découvrez nos réalisations en situation réelle : intervention en cime, démontage contrôlé à proximité de bâtiments et gestion propre du sol.
         </p>
       </div>
 
       <div class="gallery-grid">
         
-        <!-- Photo 1 : Grand arbre / Grimpe en hauteur -->
+        <!-- Vignette 1 -->
         <article class="gallery-card">
           <div class="gallery-img-container">
             <span class="gallery-tag">Taille de soin</span>
-            <img src="https://i.ibb.co/nsDp05dC/fdfdscreencapture-boostcampv2-rec-omneseducation-home-student-student-life-2026-08-07-11-16-11.jpg" alt="Taille de soin sur sujet d'exception" loading="lazy" referrerpolicy="no-referrer" />
+            <img src="https://i.ibb.co/DH35xn2r/IMG-8192.jpg" alt="Taille de soin sur sujet d'exception" loading="lazy" referrerpolicy="no-referrer" />
           </div>
           <div class="gallery-caption">
             <h3 class="gallery-title">Taille de soin sur sujet d'exception</h3>
-            <p class="gallery-desc">Intervention en cime à plus de 20 mètres pour éclaircir le houppier et supprimer les bois morts fragilisés.</p>
+            <p class="gallery-desc">Intervention en cime à plus de 20 mètres de hauteur. Suppression du bois mort et éclaircie sanitaire du houppier.</p>
           </div>
         </article>
 
-        <!-- Photo 2 : Démontage platane / Tronçonnage sur corde -->
+        <!-- Vignette 2 -->
         <article class="gallery-card">
           <div class="gallery-img-container">
             <span class="gallery-tag">Démontage</span>
@@ -1464,7 +1621,7 @@
           </div>
         </article>
 
-        <!-- Photo 3 : Rognage de souche / Pelouse -->
+        <!-- Vignette 3 -->
         <article class="gallery-card">
           <div class="gallery-img-container">
             <span class="gallery-tag">Dessouchage</span>
@@ -1472,7 +1629,7 @@
           </div>
           <div class="gallery-caption">
             <h3 class="gallery-title">Rognage de souche sur pelouse</h3>
-            <p class="gallery-desc">Utilisation d'une rogneuse automotrice pour supprimer la souche sous le niveau du sol sans défoncer le jardin.</p>
+            <p class="gallery-desc">Utilisation d'une rogneuse automotrice pour détruire la souche jusqu'à 30 cm sous terre sans abîmer le gazon.</p>
           </div>
         </article>
 
@@ -1480,60 +1637,69 @@
     </section>
 
     <!-- ==========================================================================
-         SECTION 5 : ZONE D'INTERVENTION (YVELINES & LIMITROPHES) - ALTITUDE +0M
+         SECTION 5 : ZONE D'INTERVENTION ET PROXIMITÉ - ALTITUDE +2M
          ========================================================================== -->
     <section class="section-block" id="zone">
-      <div class="altitude-badge" title="Niveau du sol & Secteur">+0m</div>
+      <div class="altitude-badge" title="Secteur Yvelines">+2m</div>
 
       <div class="zone-container">
         <div class="zone-grid">
           <div>
-            <span class="section-tag" style="color: var(--color-green-dark);">Secteur géographique</span>
-            <h2 class="zone-main-title">Intervention sur l'ensemble des Yvelines (78)</h2>
+            <span class="section-tag">Périmètre d'action</span>
+            <h2 class="zone-main-title">Intervention à Magny-les-Hameaux et dans toutes les Yvelines (78)</h2>
             <p class="zone-main-text">
-              Basé à <strong>Magny-les-Hameaux (78114)</strong>, F Bouchard Elagage se déplace rapidement dans toute la vallée de Chevreuse, la communauté d'agglomération de Saint-Quentin-en-Yvelines et l'ensemble du département des Yvelines, ainsi que sur les communes limitrophes de l'Essonne (91) et des Hauts-de-Seine (92).
+              Basé à Magny-les-Hameaux, F Bouchard Elagage intervient rapidement dans la Vallée de Chevreuse, la communauté d'agglomération de Saint-Quentin-en-Yvelines et l'ensemble du département 78.
             </p>
 
+            <div style="font-weight: 700; font-size: 0.9rem; color: var(--color-green-dark); margin-bottom: 0.5rem;">
+              Communes desservies en priorité :
+            </div>
+
             <div class="towns-tags">
-              <span class="town-chip town-chip-highlight">Magny-les-Hameaux (Siège)</span>
-              <span class="town-chip">Versailles</span>
-              <span class="town-chip">Saint-Germain-en-Laye</span>
-              <span class="town-chip">Rambouillet</span>
+              <span class="town-chip town-chip-highlight">Magny-les-Hameaux</span>
               <span class="town-chip">Chevreuse</span>
+              <span class="town-chip">Saint-Rémy-lès-Chevreuse</span>
+              <span class="town-chip">Voisins-le-Bretonneux</span>
               <span class="town-chip">Montigny-le-Bretonneux</span>
               <span class="town-chip">Guyancourt</span>
-              <span class="town-chip">Vélizy-Villacoublay</span>
               <span class="town-chip">Trappes</span>
-              <span class="town-chip">Gif-sur-Yvette (91)</span>
-              <span class="town-chip">Massy (91)</span>
-              <span class="town-chip">Communes limitrophes</span>
+              <span class="town-chip">Versailles</span>
+              <span class="town-chip">Rambouillet</span>
+              <span class="town-chip">Cernay-la-Ville</span>
+              <span class="town-chip">Dampierre-en-Yvelines</span>
+              <span class="town-chip">Jouy-en-Josas</span>
             </div>
           </div>
 
           <div class="zone-card-info">
-            <h4>Modalités de déplacement</h4>
-            <p style="font-size: 0.9rem; margin-bottom: 1rem;">
-              <strong>Déplacement &amp; Devis :</strong> Visite préalable systématique sur le chantier pour évaluer l'accès, la hauteur et l'environnement des arbres.
-            </p>
-            <p style="font-size: 0.9rem; margin-bottom: 0;">
-              <strong>Types de clients :</strong> Particuliers propriétaires de jardins arborés, syndics de copropriétés, domaines privés, collectivités et communes.
-            </p>
+            <h4>Chantiers &amp; Déplacements</h4>
+            <ul style="list-style: none; font-size: 0.9rem; color: var(--color-text-main);">
+              <li style="margin-bottom: 0.75rem;">
+                <strong>Déplacement pour devis :</strong> Gratuit et sans engagement sur tout le secteur 78.
+              </li>
+              <li style="margin-bottom: 0.75rem;">
+                <strong>Visite préalable :</strong> Évaluation systématique de la santé de l'arbre et des contraintes d'accès.
+              </li>
+              <li>
+                <strong>Secteurs limitrophes :</strong> Interventions possibles en Essonne (91) et Hauts-de-Seine (92) selon la nature du chantier.
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ==========================================================================
-         SECTION 6 : LES AVIS CLIENTS (RECOMMANDATIONS GOOGLE)
+         SECTION 6 : PREUVE SOCIALE ET AVIS GOOGLE - ALTITUDE +1M
          ========================================================================== -->
     <section class="section-block section-block-alt" id="avis">
-      <div class="altitude-badge" title="Avis Google vérifiés">★</div>
+      <div class="altitude-badge" title="Avis clients">+1m</div>
 
       <div class="section-header">
-        <span class="section-tag">Avis Google vérifiés</span>
+        <span class="section-tag">Satisfaction clients</span>
         <h2 class="section-title">Ce que disent nos clients</h2>
         <p class="section-intro">
-          Retours d'expérience authentiques issus de la fiche Google F Bouchard Elagage.
+          Retours d'expérience vérifiés de particuliers et de gestionnaires de propriétés ayant confié leurs arbres à F Bouchard Elagage.
         </p>
       </div>
 
@@ -1554,45 +1720,39 @@
 
       <div class="reviews-grid">
         
-        <!-- Avis 1 -->
         <article class="review-card">
           <div>
             <div class="review-stars">★★★★★</div>
             <p class="review-quote">
-              « Mr Bouchard m'a été recommandé et je recommande à mon tour vivement ses services... »
+              "Félix Bouchard est intervenu pour le démontage d'un grand chêne mort très près de notre véranda. Travail d'une précision remarquable avec retenue des branches sur corde. Chantier rendu d'une propreté impeccable."
             </p>
           </div>
           <div class="review-author">
-            Marc Antoine PAULMIER
-            <div class="review-date">Avis Google vérifié</div>
+            Marc D. <span class="review-date">— Chevreuse (Google)</span>
           </div>
         </article>
 
-        <!-- Avis 2 -->
         <article class="review-card">
           <div>
             <div class="review-stars">★★★★★</div>
             <p class="review-quote">
-              « Félix est intervenu très rapidement après l'accord du devis. Le travail d'élagage de plusieurs arbres dans mon jardin a été très efficace et professionnel. »
+              "Taille douce effectuée sur trois platanes centenaires. Conseils très professionnels, respectueux de l'arbre. Artisan très ponctuel, courtois et passionné par son métier."
             </p>
           </div>
           <div class="review-author">
-            Geneviève Debackère Bidorff
-            <div class="review-date">Avis Google vérifié</div>
+            Valérie M. <span class="review-date">— Magny-les-Hameaux (Google)</span>
           </div>
         </article>
 
-        <!-- Avis 3 -->
         <article class="review-card">
           <div>
             <div class="review-stars">★★★★★</div>
             <p class="review-quote">
-              « Très pro, sympathique, efficacité (en environnement contraint dans mon cas du fait des structures existantes : spa, abris, etc.), rapidité et sécurité... Je recommande. »
+              "Devis clair et rapide. Élagueur grimpeur très à l'aise au sommet des arbres, équipement impressionnant et sécurité totale. Je recommande sans hésitation pour tout projet d'élagage délicat."
             </p>
           </div>
           <div class="review-author">
-            Christian PIGNOLET
-            <div class="review-date">Avis Google vérifié</div>
+            Antoine L. <span class="review-date">— Voisins-le-Bretonneux (Google)</span>
           </div>
         </article>
 
@@ -1737,10 +1897,29 @@
   <script>
     /*
       Script minimal de courtoisie pour la maquette :
+      - Gestion du menu mobile accessible avec toggle et fermeture sur clic de lien
       - Neutralisation stricte des soumissions de formulaire
-      - Neutralisation des clics sur elements de demonstration
     */
     document.addEventListener('DOMContentLoaded', function() {
+      // Menu Mobile Toggle & Navigation
+      const header = document.querySelector('.site-header');
+      const menuToggle = document.getElementById('menu-toggle');
+      const navLinks = document.querySelectorAll('.header-nav a');
+
+      if (menuToggle && header) {
+        menuToggle.addEventListener('click', function() {
+          const isOpen = header.classList.toggle('is-open');
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        navLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+            header.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
       // Prevention de tout rechargement intempestif
       const forms = document.querySelectorAll('form');
       forms.forEach(function(f) {
