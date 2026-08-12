@@ -1099,17 +1099,40 @@
       border-radius: 2px;
       padding: 3rem 2rem;
       margin-top: 1rem;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
     .contact-wrapper h2, .contact-wrapper h3 {
       font-family: var(--font-serif);
       color: #ffffff;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .contact-title {
+      font-size: clamp(1.35rem, 5vw, 2rem);
+      margin-bottom: 0.75rem;
+      line-height: 1.25;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 3rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .contact-grid > * {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
     }
 
     @media (min-width: 860px) {
@@ -1127,18 +1150,29 @@
       color: #fef3c7;
       margin-bottom: 1.75rem;
       font-weight: 600;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .contact-form {
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
     }
 
     .form-label {
@@ -1148,6 +1182,9 @@
     }
 
     .form-control {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       padding: 0.85rem 1rem;
       font-size: 0.95rem;
       border-radius: 4px;
@@ -1155,6 +1192,18 @@
       background-color: rgba(255, 255, 255, 0.08);
       color: #ffffff;
       font-family: inherit;
+    }
+
+    select.form-control {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    textarea.form-control {
+      white-space: pre-wrap;
+      resize: vertical;
+      max-width: 100%;
     }
 
     .form-control:disabled {
@@ -1172,6 +1221,12 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .info-item-title {
@@ -1771,7 +1826,7 @@
           <!-- Colonne Formulaire (Inerte pour la démonstration) -->
           <div>
             <span class="section-tag" style="color: var(--color-accent);">Formulaire de demande</span>
-            <h2 style="font-size: 2rem; margin-bottom: 0.75rem;">Obtenir un devis gratuit</h2>
+            <h2 class="contact-title">Obtenir un devis gratuit</h2>
             <p style="font-size: 0.95rem; color: #d1ded6; margin-bottom: 1.5rem;">
               Décrivez votre besoin d'élagage, d'abattage ou de dessouchage. Une visite sur place sera planifiée sous réserve de vos disponibilités.
             </p>
