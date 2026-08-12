@@ -1,0 +1,6 @@
+{
+  "name": "F Bouchard Elagage",
+  "description": "Maquette de démonstration monopage pour F Bouchard Elagage, arboriste et élagueur grimpeur dans les Yvelines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
